@@ -24,7 +24,5 @@ public class Breakable : PhysicBlock {
         }
 
         Destroy(gameObject);
-
-        ThrowRandom(BreakForce);
     }
 }

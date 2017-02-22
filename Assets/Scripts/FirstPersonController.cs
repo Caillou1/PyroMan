@@ -127,6 +127,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 isFueling = false;
             }
 
+            if(Input.GetButtonDown("Slow"))
+            {
+                StopCoroutine(SlowUp());
+                Time.timeScale = 1;
+                StartCoroutine(SlowDown());
+            }
+
+            if (Input.GetButtonUp("Slow"))
+            {
+                StopCoroutine(SlowDown());
+                StartCoroutine(SlowUp());
+            }
+
             if (isFiring)
             {
                 RaycastHit hit;
@@ -146,6 +159,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     }
                 }
             }
+        }
+
+        IEnumerator SlowDown()
+        {
+            Time.timeScale -= .01f;
+            yield return new WaitForEndOfFrame();
+            if (Time.timeScale > .3f)
+                StartCoroutine(SlowDown());
+        }
+
+        IEnumerator SlowUp()
+        {
+            Time.timeScale += .01f;
+            yield return new WaitForEndOfFrame();
+            if (Time.timeScale < 1)
+                StartCoroutine(SlowUp());
+            else
+                Time.timeScale = 1;
         }
 
         IEnumerator SinkFuel()

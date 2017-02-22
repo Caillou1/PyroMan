@@ -25,16 +25,16 @@ public class Explosive : PhysicBlock {
             Collider[] hits = Physics.OverlapSphere(transform.position, 10);
             foreach (var hit in hits)
             {
+                var b1 = hit.GetComponent<Breakable>();
+                if (b1 != null)
+                {
+                    b1.Break();
+                }
+
                 var flam = hit.GetComponent<PhysicBlock>();
                 if (flam != null)
                 {
                     flam.Throw(transform.position, ExplosionForce, ExplosionRadius);
-                }
-
-                var b1 = hit.GetComponent<Breakable>();
-                if(b1 != null)
-                {
-                    b1.Break();
                 }
 
                 var fl = hit.GetComponent<Flammable>();

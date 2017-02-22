@@ -22,7 +22,7 @@ public class Molotov : MonoBehaviour {
 
     private bool isGrounded()
     {
-        return Physics.CheckSphere(tf.position, CheckRadius);
+        return Physics.Raycast(tf.position, Vector3.down, .1f);
     }
 
     private void SpreadFuel()
