@@ -30,6 +30,13 @@ public class Explosive : PhysicBlock {
                 {
                     flam.Throw(transform.position, ExplosionForce, ExplosionRadius);
                 }
+
+                var b1 = hit.GetComponent<Breakable>();
+                if(b1 != null)
+                {
+                    b1.Break();
+                }
+
                 var fl = hit.GetComponent<Flammable>();
                 if (fl != null)
                 {
