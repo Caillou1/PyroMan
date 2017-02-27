@@ -9,6 +9,7 @@ public class Breakable : PhysicBlock {
 
     private void Start()
     {
+        Init();
         Shards = GetComponentsInChildren<Transform>();
     }
 
